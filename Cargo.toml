@@ -13,5 +13,5 @@ log = "0.4"
 log4rs = "1.0"
 
 [[test]]
-name="ea7"
-path="exercises/easy/algorithm7.rs"
+name="ea"
+path="exercises/easy/algorithm1.rs"

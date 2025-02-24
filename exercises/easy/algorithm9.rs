@@ -3,23 +3,17 @@
 	This question requires you to implement a binary heap function
 */
 
-
 use std::cmp::Ord;
 use std::default::Default;
+use std::cmp::Ordering;
 
-pub struct Heap<T>
-where
-    T: Default,
-{
+pub struct BinaryHeap<T> {
     count: usize,
     items: Vec<T>,
     comparator: fn(&T, &T) -> bool,
 }
 
-impl<T> Heap<T>
-where
-    T: Default,
-{
+impl<T: Default + Clone + Ord> BinaryHeap<T> {
     pub fn new(comparator: fn(&T, &T) -> bool) -> Self {
         Self {
             count: 0,
@@ -37,15 +31,13 @@ where
     }
 
     pub fn add(&mut self, value: T) {
-        //TODO
+        self.items.push(value);
+        self.count += 1;
+        self.bubble_up(self.count);
     }
 
     fn parent_idx(&self, idx: usize) -> usize {
         idx / 2
-    }
-
-    fn children_present(&self, idx: usize) -> bool {
-        self.left_child_idx(idx) <= self.count
     }
 
     fn left_child_idx(&self, idx: usize) -> usize {
@@ -53,63 +45,62 @@ where
     }
 
     fn right_child_idx(&self, idx: usize) -> usize {
-        self.left_child_idx(idx) + 1
+        idx * 2 + 1
     }
 
-    fn smallest_child_idx(&self, idx: usize) -> usize {
-        //TODO
-		0
-    }
-}
-
-impl<T> Heap<T>
-where
-    T: Default + Ord,
-{
-    /// Create a new MinHeap
-    pub fn new_min() -> Self {
-        Self::new(|a, b| a < b)
+    fn children_present(&self, idx: usize) -> bool {
+        self.left_child_idx(idx) <= self.count
     }
 
-    /// Create a new MaxHeap
-    pub fn new_max() -> Self {
-        Self::new(|a, b| a > b)
+    fn bubble_up(&mut self, mut idx: usize) {
+        while idx > 1 {
+            let parent = self.parent_idx(idx); // 预存父节点索引
+            if (self.comparator)(&self.items[idx], &self.items[parent]) {
+                self.items.swap(idx, parent); 
+                idx = parent;
+            } else {
+                break;
+            }
+        }
     }
-}
 
-impl<T> Iterator for Heap<T>
-where
-    T: Default,
-{
-    type Item = T;
-
-    fn next(&mut self) -> Option<T> {
-        //TODO
-		None
+    fn bubble_down(&mut self, mut idx: usize) {
+        while self.children_present(idx) {
+            let mut child_idx = self.left_child_idx(idx);
+            if child_idx < self.count && (self.comparator)(&self.items[child_idx + 1], &self.items[child_idx]) {
+                child_idx += 1;
+            }
+            if (self.comparator)(&self.items[idx], &self.items[child_idx]) {
+                break;
+            }
+            self.items.swap(idx, child_idx);
+            idx = child_idx;
+        }
     }
-}
 
-pub struct MinHeap;
-
-impl MinHeap {
-    #[allow(clippy::new_ret_no_self)]
-    pub fn new<T>() -> Heap<T>
-    where
-        T: Default + Ord,
-    {
-        Heap::new(|a, b| a < b)
+    pub fn pop(&mut self) -> Option<T> {
+        if self.is_empty() {
+            return None;
+        }
+        self.items.swap(1, self.count);
+        let result = self.items.pop();
+        self.count -= 1;
+        self.bubble_down(1);
+        result
     }
 }
 
-pub struct MaxHeap;
+fn main() {
+    let mut heap = BinaryHeap::new(|a: &i32, b: &i32| a < b);
+    heap.add(3);
+    heap.add(1);
+    heap.add(4);
+    heap.add(1);
+    heap.add(5);
+    heap.add(9);
 
-impl MaxHeap {
-    #[allow(clippy::new_ret_no_self)]
-    pub fn new<T>() -> Heap<T>
-    where
-        T: Default + Ord,
-    {
-        Heap::new(|a, b| a > b)
+    while let Some(value) = heap.pop() {
+        println!("{}", value);
     }
 }
 
@@ -118,37 +109,37 @@ mod tests {
     use super::*;
     #[test]
     fn test_empty_heap() {
-        let mut heap = MaxHeap::new::<i32>();
-        assert_eq!(heap.next(), None);
+        let mut heap = BinaryHeap::new(|a: &i32, b: &i32| a > b);
+        assert_eq!(heap.pop(), None);
     }
 
     #[test]
     fn test_min_heap() {
-        let mut heap = MinHeap::new();
+        let mut heap = BinaryHeap::new(|a: &i32, b: &i32| a < b);
         heap.add(4);
         heap.add(2);
         heap.add(9);
         heap.add(11);
         assert_eq!(heap.len(), 4);
-        assert_eq!(heap.next(), Some(2));
-        assert_eq!(heap.next(), Some(4));
-        assert_eq!(heap.next(), Some(9));
+        assert_eq!(heap.pop(), Some(2));
+        assert_eq!(heap.pop(), Some(4));
+        assert_eq!(heap.pop(), Some(9));
         heap.add(1);
-        assert_eq!(heap.next(), Some(1));
+        assert_eq!(heap.pop(), Some(1));
     }
 
     #[test]
     fn test_max_heap() {
-        let mut heap = MaxHeap::new();
+        let mut heap = BinaryHeap::new(|a: &i32, b: &i32| a > b);
         heap.add(4);
         heap.add(2);
         heap.add(9);
         heap.add(11);
         assert_eq!(heap.len(), 4);
-        assert_eq!(heap.next(), Some(11));
-        assert_eq!(heap.next(), Some(9));
-        assert_eq!(heap.next(), Some(4));
+        assert_eq!(heap.pop(), Some(11));
+        assert_eq!(heap.pop(), Some(9));
+        assert_eq!(heap.pop(), Some(4));
         heap.add(1);
-        assert_eq!(heap.next(), Some(2));
+        assert_eq!(heap.pop(), Some(2));
     }
 }

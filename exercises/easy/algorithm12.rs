@@ -5,15 +5,29 @@
 
     You need to implement the function `is_palindrome(s: String) -> bool`.
     The function should return `true` if the string is a palindrome, and `false` otherwise.
-    
+
     Hint: Consider normalizing the string by converting it to lowercase and removing non-alphabetical characters before checking.
 */
 
 use std::fmt::{self, Display, Formatter};
 
+use colored::Colorize;
+
 pub fn is_palindrome(s: String) -> bool {
     // TODO: Implement the logic to check if the string is a palindrome
-    false // Placeholder return value
+    let mut s_new = String::new();
+    for ch in s.chars() {
+        if ch.is_ascii_alphabetic() {
+            s_new.push(ch);
+        }
+    }
+    let s_new = s_new.to_lowercase();
+    let s_rev: String = s_new.chars().rev().collect();
+    if s_new == s_rev {
+        true
+    } else {
+        false
+    } // Placeholder return value
 }
 
 #[cfg(test)]

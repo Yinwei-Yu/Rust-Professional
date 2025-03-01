@@ -15,19 +15,8 @@ use colored::Colorize;
 
 pub fn is_palindrome(s: String) -> bool {
     // TODO: Implement the logic to check if the string is a palindrome
-    let mut s_new = String::new();
-    for ch in s.chars() {
-        if ch.is_ascii_alphabetic() {
-            s_new.push(ch);
-        }
-    }
-    let s_new = s_new.to_lowercase();
-    let s_rev: String = s_new.chars().rev().collect();
-    if s_new == s_rev {
-        true
-    } else {
-        false
-    } // Placeholder return value
+    let s_new:String=s.chars().filter(|ch|ch.is_alphabetic()).map(|ch|ch.to_ascii_lowercase()).collect();
+    s_new.chars().eq(s_new.chars().rev())
 }
 
 #[cfg(test)]

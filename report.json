@@ -57,20 +57,105 @@
     },
     {
       "name": "algorithm12.rs",
-      "result": false,
-      "score": 0
+      "result": true,
+      "score": 1
     },
     {
       "name": "algorithm13.rs",
       "result": true,
       "score": 1
+    },
+    {
+      "name": "algorithm14.rs",
+      "result": true,
+      "score": 1
+    },
+    {
+      "name": "algorithm15.rs",
+      "result": true,
+      "score": 1
+    },
+    {
+      "name": "algorithm16.rs",
+      "result": true,
+      "score": 1
+    },
+    {
+      "name": "algorithm17.rs",
+      "result": true,
+      "score": 1
+    },
+    {
+      "name": "algorithm18.rs",
+      "result": true,
+      "score": 1
+    },
+    {
+      "name": "algorithm19.rs",
+      "result": true,
+      "score": 1
+    },
+    {
+      "name": "algorithm20.rs",
+      "result": true,
+      "score": 1
+    },
+    {
+      "name": "solution1",
+      "result": true,
+      "score": 6
+    },
+    {
+      "name": "solution2",
+      "result": true,
+      "score": 6
+    },
+    {
+      "name": "solution3",
+      "result": true,
+      "score": 6
+    },
+    {
+      "name": "solution4",
+      "result": true,
+      "score": 6
+    },
+    {
+      "name": "solution5",
+      "result": false,
+      "score": 0
+    },
+    {
+      "name": "solutiont1",
+      "result": false,
+      "score": 0
+    },
+    {
+      "name": "solutiont2",
+      "result": false,
+      "score": 0
+    },
+    {
+      "name": "solutiont3",
+      "result": false,
+      "score": 0
+    },
+    {
+      "name": "solutiont4",
+      "result": false,
+      "score": 0
+    },
+    {
+      "name": "solutiont5",
+      "result": false,
+      "score": 0
     }
   ],
   "statistics": {
-    "total_exercises": 13,
-    "total_successes": 12,
-    "total_failures": 1,
-    "total_score": 12,
-    "total_time": 20
+    "total_exercises": 30,
+    "total_successes": 24,
+    "total_failures": 6,
+    "total_score": 44,
+    "total_time": 13
   }
 }

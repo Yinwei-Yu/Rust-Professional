@@ -12,3 +12,6 @@ termion = "1.5"
 log = "0.4"
 log4rs = "1.0"
 
+[[test]]
+name="ea"
+path="./exercises/easy/algorithm12.rs"

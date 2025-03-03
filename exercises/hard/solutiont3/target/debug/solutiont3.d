@@ -1,0 +1,1 @@
+E:\Works\Rust-Professional\exercises\hard\solutiont3\target\debug\solutiont3.exe: E:\Works\Rust-Professional\exercises\hard\solutiont3\src\district.rs E:\Works\Rust-Professional\exercises\hard\solutiont3\src\main.rs

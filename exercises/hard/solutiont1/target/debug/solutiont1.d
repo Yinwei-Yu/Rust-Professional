@@ -1,0 +1,1 @@
+E:\Works\Rust-Professional\exercises\hard\solutiont1\target\debug\solutiont1.exe: E:\Works\Rust-Professional\exercises\hard\solutiont1\src\conjecture.rs E:\Works\Rust-Professional\exercises\hard\solutiont1\src\main.rs
